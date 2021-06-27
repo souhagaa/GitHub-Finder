@@ -116,7 +116,7 @@ class App extends Component {
               <Route
                 exact
                 path="/"
-                render={props => (
+                render={ props => (
                   <Fragment>
                     <Search
                       searchUsers={this.searchUsers}
