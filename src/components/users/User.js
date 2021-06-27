@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import Repos from '../Repos/Repos'
 import Spinner from '../layout/Spinner'
 import propTypes from 'prop-types'
 
@@ -7,12 +8,15 @@ export class User extends Component {
 
     componentDidMount() {
         this.props.getUser(this.props.match.params.login)
+        this.props.getUserRepos(this.props.match.params.login)
     }
 
     static propTypes = {
         getUser: propTypes.func.isRequired,
+        getUserRepos: propTypes.func.isRequired,
         loading: propTypes.bool.isRequired,
         user: propTypes.object.isRequired,
+        repos: propTypes.array.isRequired,
     }
 
     render() {
@@ -30,8 +34,8 @@ export class User extends Component {
             company,
             hireable 
         } = this.props.user
-        const {loading} = this.props;
-
+        const { loading, repos} = this.props;
+        
         if(loading) return <Spinner/>;
         return (
         <Fragment>
@@ -77,13 +81,30 @@ export class User extends Component {
                         </li>
                     </ul>
                 </div>
+                
             </div>
             <div className="card text-center">
-                <div className="badge-primary">Followers: {followers}</div> 
-                <div className="badge-success">Following: {following}</div>  
-                <div className="badge-light">Public repos: {public_repos}</div>  
-                <div className="badge-dark">Public gists: {public_gists}</div>  
-            </div>
+                <button type="button" className="btn btn-primary btn-lg" disabled>
+                Followers <span className="badge badge-light">{followers}</span>
+                </button>
+                
+                <button type="button" className="btn btn-success btn-lg" disabled>
+                Following <span className="badge badge-light">{following}</span>
+                </button>
+
+                <button type="button" className="btn btn-dark btn-lg" disabled>
+                Public repos<span className="badge badge-light">{public_repos}</span>
+                </button>
+
+                <button type="button" className="btn btn-warning btn-lg" disabled>
+                Public gists <span className="badge badge-light">{public_gists}</span>
+                </button>
+                    {/* <div className="badge-primary" style={{width: '50%', display: 'block'}}>Followers: {followers}</div> 
+                    <div className="badge-success" style={{width: '50%'}}>Following: {following}</div>  
+                    <div className="badge-light" style={{width: '50%'}}>Public repos: {public_repos}</div>  
+                    <div className="badge-dark" style={{width: '50%'}}>Public gists: {public_gists}</div>   */}
+                </div>
+                <Repos repos={repos}/>
         </Fragment>)
         
         
