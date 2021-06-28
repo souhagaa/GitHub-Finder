@@ -25,7 +25,7 @@ const Search = ({ showClear, clearUsers, searchUsers, setAlert}) => {
                     onChange={handleChange} />
                 <input
                     type="submit"
-                    value="search"
+                    value="Search"
                     className="btn btn-dark btn-block"
                 />
             </form>
