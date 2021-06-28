@@ -12,6 +12,8 @@ import About from './components/pages/About'
 
 import axios from 'axios'
 
+import GithubState from './context/github/githubState'
+
 const App = () => {
 
   const [users, setUsers] = useState([])
@@ -19,18 +21,6 @@ const App = () => {
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(false)
   const [alert, setAlert] = useState({ msg: null,type: null})
-  // async componentDidMount() {
-  //   this.setState({ loading: true })
-
-  //   const res = await axios.get(`https://api.github.com/users?client_id=
-  //   ${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=
-  //   ${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
-
-  //   this.setState({
-  //     loading: false,
-  //     users: res.data
-  //   })
-  // }
 
   //Search GitHub users
   const searchUsers = async (text) => {
@@ -84,6 +74,7 @@ const App = () => {
   }
 
     return (
+    <GithubState>
       <Router>
         <div className="App" >
           <Navbar />
@@ -124,7 +115,7 @@ const App = () => {
 
         </div>
       </Router>
-
+    </GithubState>
     );
   
 }
