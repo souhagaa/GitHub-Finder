@@ -1,4 +1,4 @@
-import Ract , {useReducer} from 'react'
+import React , {useReducer} from 'react'
 import axios from 'axios'
 import GithubContext from './githubContext'
 import GithubReducer from './githubReducer'
@@ -31,14 +31,17 @@ const GithubState = props => {
 
     // Set loading
 
-
+    // we have to wrap our entire app with the provider
+    // we pass as props anything that we want available for the entire app
     return <GithubContext.Provider value={{
         users: state.users,
         user: state.user,
         repos: state.repos,
         loading: state.loading,
-    }}>
-        {props.children}
+    }}>        
+    {/* because we need to wrap our entire app in the provider */}
+
+        {props.children} 
     </GithubContext.Provider>
 }
 

@@ -5,7 +5,7 @@ import Spinner from '../layout/Spinner'
 import propTypes from 'prop-types'
 
 const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
-
+// eslint-disable-next-line
     useEffect(() => {
         getUser(match.params.login)
         getUserRepos(match.params.login)
@@ -50,7 +50,7 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
                     <h3>Bio</h3>
                     <p>{bio}</p>
                     </Fragment>}
-                <a href={html_url} target="_blank" className="btn btn-dark my-1">Visit GitHub profile</a>
+                <a href={html_url} target="_blank" rel="noopener" className="btn btn-dark my-1">Visit GitHub profile</a>
                 <ul>
                     <li>
                         {login && <Fragment>
@@ -64,7 +64,7 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
                     </li>
                     <li>
                         {blog && <Fragment>
-                            <strong>Website:</strong> <a href={blog} target="_blank">{blog}</a>
+                            <strong>Website:</strong> <a href={blog} rel="noopener" target="_blank">{blog}</a>
                             </Fragment>}
                     </li>
                 </ul>

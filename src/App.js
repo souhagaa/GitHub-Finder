@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,Fragment } from 'react';
+import React, { useState ,Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/layout/Navbar'
