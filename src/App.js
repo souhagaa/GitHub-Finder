@@ -1,4 +1,4 @@
-import React, { useState ,Fragment } from 'react';
+import React, { Fragment} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/layout/Navbar'
@@ -11,35 +11,24 @@ import Search from './components/users/Search'
 import About from './components/pages/About'
 
 import GithubState from './context/github/githubState'
+import AlertState from './context/alert/alertState'
 
 const App = () => {
 
-  const [alert, setAlert] = useState({ msg: null,type: null})
-
-  // Set an alert for when the user submits a search without typing anything
-  const alertMsg = (msg, type) => {
-    setAlert({msg: msg, type:type})
-
-    // to make the alert go away in 5s
-    setTimeout(() => {
-      setAlert({msg: null,type: null})
-    }, 5000);
-  }
-
     return (
       <GithubState>
+        <AlertState>
         <Router>
           <div className="App" >
             <Navbar />
             <div className="container">
-              {alert.msg !== null && <Alert alert={alert} />}
+              <Alert/>
               <Switch>
                 <Route exact
                   path="/"
                   render={props => (
                     <Fragment>
-                      <Search
-                        setAlert={alertMsg} />
+                      <Search/>
                       <Users/>
                     </Fragment>
                   )} />
@@ -49,6 +38,7 @@ const App = () => {
             </div>
           </div>
         </Router>
+        </AlertState>
       </GithubState>
     );
   
