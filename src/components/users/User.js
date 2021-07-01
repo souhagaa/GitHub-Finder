@@ -1,11 +1,15 @@
-import React, { useEffect, Fragment } from 'react'
+import React, { useEffect, Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Repos from '../Repos/Repos'
 import Spinner from '../layout/Spinner'
 import propTypes from 'prop-types'
+import GitHubContext from '../../context/github/githubContext'
 
-const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
-// eslint-disable-next-line
+
+const User = ({ match }) => {
+    const githubContext = useContext(GitHubContext)
+    const {getUser, getUserRepos, user, loading, repos} = githubContext;
+    // eslint-disable-next-line
     useEffect(() => {
         getUser(match.params.login)
         getUserRepos(match.params.login)
@@ -87,22 +91,11 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
             <button type="button" className="btn btn-warning btn-lg" disabled>
             Public gists <span className="badge badge-light">{public_gists}</span>
             </button>
-                {/* <div className="badge-primary" style={{width: '50%', display: 'block'}}>Followers: {followers}</div> 
-                <div className="badge-success" style={{width: '50%'}}>Following: {following}</div>  
-                <div className="badge-light" style={{width: '50%'}}>Public repos: {public_repos}</div>  
-                <div className="badge-dark" style={{width: '50%'}}>Public gists: {public_gists}</div>   */}
             </div>
             <Repos repos={repos}/>
     </Fragment>)
         
 }
 
-User.propTypes = {
-        getUser: propTypes.func.isRequired,
-        getUserRepos: propTypes.func.isRequired,
-        loading: propTypes.bool.isRequired,
-        user: propTypes.object.isRequired,
-        repos: propTypes.array.isRequired,
-    }
 
 export default User
