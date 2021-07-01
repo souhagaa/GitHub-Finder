@@ -16,7 +16,6 @@ const App = () => {
 
   const [alert, setAlert] = useState({ msg: null,type: null})
 
-
   // Set an alert for when the user submits a search without typing anything
   const alertMsg = (msg, type) => {
     setAlert({msg: msg, type:type})
@@ -35,8 +34,7 @@ const App = () => {
             <div className="container">
               {alert.msg !== null && <Alert alert={alert} />}
               <Switch>
-                <Route
-                  exact
+                <Route exact
                   path="/"
                   render={props => (
                     <Fragment>
@@ -46,16 +44,9 @@ const App = () => {
                     </Fragment>
                   )} />
                 <Route exact path='/about' component={About} />
-                <Route exact
-                  path='/user/:login'
-                  render={props => (
-                    <User {...props} />
-                  )} />
-
+                <Route exact path='/user/:login' component={User} />
               </Switch>
-
             </div>
-
           </div>
         </Router>
       </GithubState>
